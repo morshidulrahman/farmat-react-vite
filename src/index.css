@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .container{
+      @apply max-w-screen-2xl mx-auto px-5
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  
+    /* card shadow */
+    .card-shadow{
+      box-shadow: 0 30px 40px 0 rgb(131 132 135 / 15%);
+      -webkit-box-shadow: 0 30px 40px 0 rgb(131 132 135 / 15%);
+    }
+    .product-card{
+     @apply min-w-[250px] flex flex-col items-start cursor-pointer rounded border-gray-100 hover:border-gray-300 hover:card-shadow duration-500 ease-in-out relative overflow-hidden border-b p-4 bg-white
+    }
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
