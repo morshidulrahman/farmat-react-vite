@@ -1,13 +1,12 @@
 import React from "react";
 import { MdDelete } from "react-icons/md";
-// import Quantity from "../shared/Quantity";
-
 import { useDispatch } from "react-redux";
 import {
   increaseItemQuantity,
   decreaseItemQuantity,
   removeitems,
 } from "../../features/basketSlices";
+import Quantity from "../shared/Quantity";
 function CartTableMobile({ id, name, image, price, quantity }) {
   const dispatch = useDispatch();
 
@@ -37,11 +36,11 @@ function CartTableMobile({ id, name, image, price, quantity }) {
           Price: <span className="text-primary font-semibold">${price}</span>
         </p>
         <div className="py-2 w-fit">
-          {/* <Quantity
+          <Quantity
             quantity={quantity}
             decreaseQuantity={decreaseQuantity}
             increaseQuantity={increaseQuantity}
-          /> */}
+          />
         </div>
         <p className="text-sm text-gray-500">
           Total Price:{" "}

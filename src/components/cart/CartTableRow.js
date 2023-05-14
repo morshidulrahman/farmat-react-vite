@@ -6,6 +6,7 @@ import {
   decreaseItemQuantity,
   removeitems,
 } from "../../features/basketSlices";
+import Quantity from "../shared/Quantity";
 
 function CartTableRow({ id, name, image, price, weight, quantity }) {
   const dispatch = useDispatch();
@@ -39,11 +40,11 @@ function CartTableRow({ id, name, image, price, weight, quantity }) {
         <td className="py-5">${price}</td>
         <td className="py-5">
           <div className="w-28">
-            {/* <Quantity
+            <Quantity
               quantity={quantity}
               decreaseQuantity={decreaseQuantity}
               increaseQuantity={increaseQuantity}
-            /> */}
+            />
           </div>
         </td>
         <td className="py-5">${(price * quantity).toFixed(2)}</td>
