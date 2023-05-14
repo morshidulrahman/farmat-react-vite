@@ -119,8 +119,6 @@ export const DEALS = [
     reviews:
       "As one of Farmart’s premium beef suppliers, Local Angus works with a coalition of small family farms throughout the Mid-Atlantic region* who feed their cattle a diet of primarily grass, supplemented by grain throughout the finishing months. Every farm in this program is independently audited for animal welfare practices to ensure the best standards of care.",
 
-    reviews:
-      "As one of Farmart’s premium beef suppliers, Local Angus works with a coalition of small family farms throughout the Mid-Atlantic region* who feed their cattle a diet of primarily grass, supplemented by grain throughout the finishing months. Every farm in this program is independently audited for animal welfare practices to ensure the best standards of care.",
     image:
       "https://i0.wp.com/demo4.drfuri.com/farmart2/wp-content/uploads/sites/11/2020/02/07_7b.jpg?fit=640%2C640&ssl=1",
     quantity: 1,

@@ -3,6 +3,7 @@ import App from "../App";
 import Main from "../layout/Main";
 
 import SingleProduct from "../pages/SingleProduct";
+import Cart from "../pages/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
       {
         path: "product/:id",
         element: <SingleProduct />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },

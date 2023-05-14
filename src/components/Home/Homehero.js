@@ -1,5 +1,15 @@
 import React from "react";
 import { setBackgroundImage } from "../../utils/helper";
+import { toast } from "react-toastify";
+
+import { notifications } from "@mantine/notifications";
+const handleclick = () => {
+  notifications.show({
+    title: "Default notification",
+    message: "Hey there, your code is awesome! 🤥",
+  });
+};
+
 function Homehero() {
   return (
     <section
@@ -21,12 +31,12 @@ function Homehero() {
               New arrivals with naturre fruits, juice <br />
               milks, essential for summer
             </p>
-            <a
-              href="/"
+            <button
               className="bg-white md:mt-14 mt-10  block px-5 py-3 rounded-sm w-fit font-semibold cursor-pointer"
+              onClick={handleclick}
             >
               Shop Now
-            </a>
+            </button>
           </div>
         </div>
         {/* hero right */}

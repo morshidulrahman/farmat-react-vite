@@ -4,11 +4,15 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineUser, AiOutlineShoppingCart } from "react-icons/ai";
 // import { selectTotalCartItems } from "../redux/slices/basketSlice";
 // import { useSelector } from "react-redux";
-import Search from "../components/shared/search";
-function Header() {
-  // const cartItems = useSelector(selectTotalCartItems);
-  const [isSticky, setIsSticky] = useState(false);
 
+import Search from "../components/shared/search";
+import { useSelector } from "react-redux";
+import { selectTotalCartItems } from "../features/basketSlices";
+import { Link } from "react-router-dom";
+function Header() {
+  const [isSticky, setIsSticky] = useState(false);
+  const cartItems = useSelector(selectTotalCartItems);
+  console.log(cartItems);
   useEffect(() => {
     const handleScroll = () => {
       if (window.pageYOffset > 80) {
@@ -28,7 +32,7 @@ function Header() {
     <header
       className={`py-7 border-b bg-white w-full top-0 ${
         isSticky
-          ? "sticky z-10 shadow-lg w-full transition duration-500 ease-in-out top-0"
+          ? "sticky z-50 shadow-lg w-full transition duration-500 ease-in-out top-0"
           : ""
       }`}
     >
@@ -36,9 +40,9 @@ function Header() {
       <div className=" flex justify-between items-center container">
         {/* header logo */}
         <div className="  ">
-          <a href="/">
+          <Link to="/">
             <img src="/images/logo.svg" width="160" height="55" />
-          </a>
+          </Link>
         </div>
         {/* header search */}
         <Search />
@@ -53,18 +57,18 @@ function Header() {
             <AiOutlineUser className="text-3xl" />
           </a>
 
-          <a href="/cart" className="flex gap-3">
+          <Link to="/cart" className="flex gap-3">
             <div className="relative">
               <AiOutlineShoppingCart className="text-3xl" />
-              <span className="bg-primary px-[4px]  rounded-sm -top-1 right-0 absolute text-xs">
-                0
+              <span className="bg-primary px-[4px] rounded-sm -top-1 right-0 absolute text-xs font-bold">
+                {cartItems || 0}
               </span>
             </div>
             <div className="flex-col text-xs text-color hidden lg:flex">
               your Cart
               <span className="font-bold text-lg text-title">$ 0.00</span>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </header>
