@@ -5,7 +5,6 @@ import Homecategory from "./components/Home/Homecategory";
 import Homehero from "./components/Home/Homehero";
 import Homeposter from "./components/Home/Homeposter";
 import TodaysDeal from "./components/Home/TodaysDeal";
-import TopBtn from "./components/shared/TopBtn";
 
 import { setBackgroundImage } from "./utils/helper";
 
@@ -31,8 +30,6 @@ function App() {
         <EssentialProduct />
         <Healthydaly />
       </div>
-
-      <TopBtn />
     </>
   );
 }

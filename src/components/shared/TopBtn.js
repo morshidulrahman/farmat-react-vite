@@ -26,7 +26,7 @@ const TopBtn = () => {
   return (
     <button
       onClick={handleClick}
-      className={`bg-orange-500 text-white w-10 h-10 rounded-full flex justify-center items-center fixed right-10 bottom-10 transition duration-300 ${
+      className={` bg-orange text-white w-10 h-10 rounded-full flex justify-center items-center fixed right-10 bottom-10 transition duration-300 ${
         active ? "flex" : "hidden"
       }`}
     >

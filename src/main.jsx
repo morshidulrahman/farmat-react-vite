@@ -15,14 +15,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <RouterProvider router={router}>
         <MantineProvider withNormalizeCSS withGlobalStyles>
-          <Notifications position="top-right" zIndex={999} />
-          {/* <ToastContainer
-          theme="dark"
-          position="bottom-left"
-          autoClose={2000}
-          closeOnClick
-          pauseOnHover={false}
-        /> */}
+          {/* <Notifications position="top-right" zIndex={999} /> */}
+          <ToastContainer
+            theme="dark"
+            position="bottom-left"
+            autoClose={2000}
+            closeOnClick
+            pauseOnHover={false}
+          />
 
           <App />
         </MantineProvider>

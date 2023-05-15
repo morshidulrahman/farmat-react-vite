@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 function Header() {
   const [isSticky, setIsSticky] = useState(false);
   const cartItems = useSelector(selectTotalCartItems);
-  console.log(cartItems);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.pageYOffset > 80) {
@@ -53,9 +53,9 @@ function Header() {
         </div>
         {/* header icons */}
         <div className="cursor-pointer gap-3 flex l">
-          <a href="/my-account">
+          <Link to="/auth">
             <AiOutlineUser className="text-3xl" />
-          </a>
+          </Link>
 
           <Link to="/cart" className="flex gap-3">
             <div className="relative">
