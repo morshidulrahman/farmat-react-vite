@@ -1,9 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/slices/authSlice";
-import Image from "next/image";
+
 const Dashboard = () => {
-  const user = useSelector(selectUser);
+  const user = {};
   return (
     <div>
       <h1 className="text-center text-2xl font-bold mb-4">

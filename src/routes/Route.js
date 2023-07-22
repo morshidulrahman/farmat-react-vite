@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Main from "../layout/Main";
-
 import SingleProduct from "../pages/SingleProduct";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/checkout";
-import Auth from "../components/Auth/Auth";
+import Myaccount from "../pages/my-account/index";
+import EditAcont from "../pages/my-account/edit-account";
 
 export const router = createBrowserRouter([
   {
@@ -29,8 +29,12 @@ export const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
-        path: "auth",
-        element: <Auth />,
+        path: "myaccount",
+        element: <Myaccount />,
+      },
+      {
+        path: "myaccount/edit-account",
+        element: <EditAcont />,
       },
     ],
   },

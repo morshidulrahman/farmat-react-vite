@@ -1,9 +1,9 @@
 import React from "react";
 import Breadcrumb from "../components/shared/Breadcrumb";
 import Auth from "../components/Auth/Auth";
-import Dashboardwraper from "../components/dashboard/dashboardwraper";
+import Dashboardwraper from "../components/dashboard/Dashboardwraper";
 import { useSelector } from "react-redux";
-import { selectUser } from "../redux/slices/authSlice";
+import { selectUser } from "../features/authSlice";
 
 const Dashboarlayout = ({ children }) => {
   const user = useSelector(selectUser);

@@ -53,7 +53,7 @@ function Header() {
         </div>
         {/* header icons */}
         <div className="cursor-pointer gap-3 flex l">
-          <Link to="/auth">
+          <Link to="/myaccount">
             <AiOutlineUser className="text-3xl" />
           </Link>
 

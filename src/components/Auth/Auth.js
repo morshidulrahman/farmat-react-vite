@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppForm, FormInput, FormBtn } from "../shared/from";
 import * as Yup from "yup";
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+} from "firebase/auth";
+import { db } from "../../firebase/firebaseconfig";
+import { doc, setDoc } from "firebase/firestore";
 // import firebase from "firebase";
 // import { auth, db } from "../../configs/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../firebase/firebaseconfig";
 import { toast } from "react-toastify";
+import { updateUser } from "../../features/authSlice";
+import { useDispatch } from "react-redux";
+
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required().label("email address"),
   password: Yup.string().required().label("Password"),
@@ -14,63 +27,75 @@ const validationSchema = Yup.object().shape({
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [succes, setsucces] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, photoURL, displayName } = user;
+        dispatch(updateUser({ uid, email, photoURL, displayName }));
+      } else {
+        dispatch(updateUser(null));
+      }
+      setLoading(false);
+    });
+
+    return unsubscribe();
+  }, []);
 
   const handlesubmit = (values) => {
-    createUserWithEmailAndPassword(auth, values.email, values.password)
-      .then((result) => {
+    if (isLogin) {
+      signInWithEmailAndPassword(auth, values.email, values.password)
+        .then((result) => {
+          setsucces(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(error.message);
+        });
+      values.email = "";
+      values.password = "";
+    } else {
+      createUserWithEmailAndPassword(auth, values.email, values.password)
+        .then((result) => {
+          setsucces(true);
+          setTimeout(() => {
+            setsucces(false);
+          }, [1000]);
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(error.message);
+        });
+      values.email = "";
+      values.password = "";
+    }
+  };
+
+  const loginWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
         setsucces(true);
         setTimeout(() => {
           setsucces(false);
         }, [1000]);
+        try {
+          await setDoc(doc(db, "users", result.user.uid), {
+            uid: result.user.uid,
+            email: result.user.email,
+            photoURL: result.user.photoURL,
+          });
+        } catch (error) {
+          console.log(error);
+        }
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message);
       });
-    values.email = "";
-    values.password = "";
-    // if (isLogin) login(values.email, values.password);
-    // else singUp(values.email, values.password);
   };
-
-  // const loginWithGoogle = () => {
-  //   const provider = new firebase.auth.GoogleAuthProvider();
-  //   auth.signInWithPopup(provider).then((userCredential) => {
-  //     addtouserdatabase(userCredential.user);
-  //   });
-  // };
-
-  // const singUp = (email, password) => {
-  //   auth
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then((userCredential) => {
-  //       addtouserdatabase(userCredential.user);
-  //     })
-  //     .catch((error) => {
-  //       alert(error.message);
-  //       console.log(error.message);
-  //     });
-  // };
-
-  // const login = (email, password) => {
-  //   auth.signInWithEmailAndPassword(email, password).catch((error) => {
-  //     alert(error.message);
-  //     console.log(error.message);
-  //   });
-  // };
-
-  // const addtouserdatabase = async (user) => {
-  //   const { uid, displayName, photoURL, email } = user;
-  //   const userref = await db.collection("users").doc(uid).get();
-  //   if (!userref.exists) {
-  //     db.collection("users").doc(uid).set({
-  //       uid,
-  //       name: displayName,
-  //       email,
-  //       image: photoURL,
-  //     });
-  //   }
-  // };
 
   return (
     <div className="mt-10">
@@ -122,7 +147,7 @@ const Auth = () => {
             <p className="text-center mt-5">Or</p>
             <div className="flex items-center justify-center gap-5 mt-5">
               <button
-                // onClick={loginWithGoogle}
+                onClick={loginWithGoogle}
                 className="bg-[#DB4437] text-white px-5 py-2 rounded-md"
               >
                 Google

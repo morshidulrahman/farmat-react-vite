@@ -1,3 +1,4 @@
+import { useState } from "react";
 import EssentialProduct from "./components/Home/Essentialproduct";
 import FeatureBrands from "./components/Home/FeatureBrands";
 import Healthydaly from "./components/Home/Healthydaly";
@@ -9,6 +10,7 @@ import TodaysDeal from "./components/Home/TodaysDeal";
 import { setBackgroundImage } from "./utils/helper";
 
 function App() {
+  const [state, setstate] = useState(false);
   return (
     <>
       <Homehero />
