@@ -1,18 +1,21 @@
-// import React, { useContext } from "react";
-// import { AuthContext } from "../components/Provider/AuthProvider";
-// import { Navigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/authSlice";
+import { LoadingOverlay } from "@mantine/core";
 
-// const PrivateRoute = ({ children }) => {
-//   const { user, loading } = useContext(AuthContext);
+const PrivateRoute = ({ children }) => {
+  const user = useSelector(selectUser);
+  const { authloading } = useSelector((state) => state.auth);
 
-//   if (loading) {
-//     return <progress className="progress w-56"></progress>;
-//   }
+  if (authloading) {
+    return <LoadingOverlay visible={authloading} />;
+  }
 
-//   if (user) {
-//     return children;
-//   }
-//   return <Navigate to="/login" replace={true}></Navigate>;
-// };
+  if (user) {
+    return children;
+  }
+  return <Navigate to="/login" replace={true}></Navigate>;
+};
 
-// export default PrivateRoute;
+export default PrivateRoute;

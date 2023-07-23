@@ -16,7 +16,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../../firebase/firebaseconfig";
 import { toast } from "react-toastify";
-import { updateUser } from "../../features/authSlice";
+import { updateUser, updateAuthloading } from "../../features/authSlice";
 import { useDispatch } from "react-redux";
 
 const validationSchema = Yup.object().shape({
@@ -36,6 +36,7 @@ const Auth = () => {
       if (user) {
         const { uid, email, photoURL, displayName } = user;
         dispatch(updateUser({ uid, email, photoURL, displayName }));
+        dispatch(updateAuthloading(false));
       } else {
         dispatch(updateUser(null));
       }

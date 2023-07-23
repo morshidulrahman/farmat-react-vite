@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../features/authSlice";
 import { UID } from "../../utils/helper";
 import { selectItems, selectTotalCartItems } from "../../features/basketSlices";
+import YourOrder from "./YourOrder";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().max(25).required().label("First Name"),
@@ -85,7 +86,9 @@ function CheckoutContent() {
             <h3 className="text-2xl mb-4">Billing details</h3>
             <Bilinginfo />
           </div>
-          <div className="w-full md:w-[40%]"></div>
+          <div className="w-full md:w-[40%]">
+            <YourOrder placeholder={placeholder} loading={loading} />
+          </div>
         </AppForm>
       </div>
     </Checkoutlayout>
