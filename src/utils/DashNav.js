@@ -18,13 +18,13 @@ export const DASHBOARD_NAV = [
   },
   {
     title: "Addresses",
-    href: "/myaccount/address",
+    href: "/address",
     icon: <TbAddressBook />,
     id: 3,
   },
   {
     title: "Orders",
-    href: "/myaccount/orders",
+    href: "/orders",
     icon: <BsCart />,
     id: 4,
   },

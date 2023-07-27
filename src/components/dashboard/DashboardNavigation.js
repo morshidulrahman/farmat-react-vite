@@ -1,8 +1,8 @@
 import React from "react";
 import DASHBOARD_NAV from "../../utils/DashNav";
 import { useParams, Link } from "react-router-dom";
-
-// import { auth } from "../../configs/firebase";
+import { auth } from "../../firebase/firebaseconfig";
+import { signOut } from "firebase/auth";
 
 const DashboardNavigation = () => {
   const router = useParams();
@@ -25,7 +25,10 @@ const DashboardNavigation = () => {
           </Link>
         );
       })}
-      <button className="px-10 cursor-pointer bg-yellow-500 bg-opacity-80 py-2 rounded-md font-semibold">
+      <button
+        className="px-10 cursor-pointer bg-yellow-500 bg-opacity-80 py-2 rounded-md font-semibold"
+        onClick={() => signOut(auth)}
+      >
         Logout
       </button>
     </div>

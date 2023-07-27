@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Bilinginfo from "./Bilinginfo";
-// import YourOrder from "./YourOrder";
 import AppForm from "../shared/from/AppForm";
 import * as Yup from "yup";
 import Checkoutlayout from "../../layout/Checkoutlayout";
@@ -10,6 +9,8 @@ import { selectUser } from "../../features/authSlice";
 import { UID } from "../../utils/helper";
 import { selectItems, selectTotalCartItems } from "../../features/basketSlices";
 import YourOrder from "./YourOrder";
+import { addDoc, doc, collection, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().max(25).required().label("First Name"),
@@ -28,20 +29,22 @@ function CheckoutContent() {
   const user = useSelector(selectUser);
   const items = useSelector(selectItems);
   const carttotal = useSelector(selectTotalCartItems);
-
+  const navigate = useNavigate();
   const [loading, setloading] = useState(false);
 
   const placeholder = async (values) => {
     const order_id = UID();
     setloading(true);
     await savingfromdata(values);
+    navigate("/success");
     await saveplaceorder(values, order_id);
-
     setloading(false);
   };
 
   const savingfromdata = async (values) => {
-    return db.collection("users").doc(user?.uid).set(
+    const collectionRef = doc(db, "users", user.uid);
+    await setDoc(
+      collectionRef,
       {
         billings_info: values,
       },
@@ -50,16 +53,23 @@ function CheckoutContent() {
   };
 
   const saveplaceorder = async (values, order_id) => {
-    const orders = {
-      order_id,
-      ...user,
-      payment_success: true,
-      items: items,
-      total: carttotal,
-      created_at: timestamp,
-      values: values,
-    };
-    await db.collection("orders").doc(order_id).set(orders);
+    const ordersref = await collection(db, "orders");
+
+    await addDoc(
+      ordersref,
+      {
+        order_id,
+        ...user,
+        payment_success: true,
+        items: items,
+        total: carttotal,
+        created_at: timestamp,
+        values: values,
+      },
+      {
+        merge: true,
+      }
+    );
   };
 
   return (

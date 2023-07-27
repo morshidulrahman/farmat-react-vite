@@ -6,7 +6,8 @@ import Cart from "../pages/Cart";
 import Checkout from "../pages/checkout";
 import Myaccount from "../pages/my-account/index";
 import EditAcont from "../pages/my-account/edit-account";
-
+import Orders from "../pages/my-account/orders";
+import Success from "../pages/success";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +36,14 @@ export const router = createBrowserRouter([
       {
         path: "myaccount/edit-account",
         element: <EditAcont />,
+      },
+      {
+        path: "success",
+        element: <Success />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
       },
     ],
   },

@@ -1,12 +1,12 @@
-import React from 'react'
-import Dashboarlayout from '../../app/layout/Dashboarlayout'
-import DashboardOrder from '../../app/components/order'
+import React from "react";
+import Dashboarlayout from "../../layout/Dashboarlayout";
+import DashboardOrder from "../../components/order/index";
 const Orders = () => {
-    return (
-        <Dashboarlayout>
-            <DashboardOrder />
-        </Dashboarlayout>
-    )
-}
+  return (
+    <Dashboarlayout>
+      <DashboardOrder />
+    </Dashboarlayout>
+  );
+};
 
-export default Orders
+export default Orders;
